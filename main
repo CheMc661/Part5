@@ -1,0 +1,58 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Part5Scratch {
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.println("GUESSING GAME LOOP!");
+        System.out.print("Rules: Try to guess the secret number. If you are closer, you get a point. The game ends ");
+        System.out.println("when the player or computer guesses the number correctly.");
+        System.out.println("Enter a number from 1-100: ");
+        int player = input.nextInt();
+        int dealer = random.nextInt(100 - 1) + 1;
+
+        int psuccess = 0;
+        int dsuccess = 0;
+
+        int playernew = Math.abs(player - 21);
+        int dealernew = Math.abs(dealer - 21);
+
+        while (true) {
+            if (playernew < dealernew && playernew != 0) {
+                psuccess++;
+                System.out.println("Player guess: " + player + ". Dealer guess: " + dealer);
+                System.out.println("Player wins!");
+                System.out.println("\nScore ::: Player - " + psuccess + ". Dealer - " + dsuccess);
+                System.out.println("Play again:");
+                player = input.nextInt();
+                dealer = random.nextInt(100 - 1) + 1;
+                playernew = Math.abs(player - 21);
+                dealernew = Math.abs(dealer - 21);
+            } else if (dealernew < playernew && dealernew != 0) {
+                dsuccess++;
+                System.out.println("Player guess: " + player + ". Dealer guess: " + dealer);
+                System.out.println("Dealer wins!");
+                System.out.println("\nScore ::: Player - " + psuccess + ". Dealer - " + dsuccess);
+                System.out.println("Play again:");
+                player = input.nextInt();
+                dealer = random.nextInt(100 - 1) + 1;
+                playernew = Math.abs(player - 21);
+                dealernew = Math.abs(dealer - 21);
+            } else if (playernew == 0) {
+                psuccess++;
+                System.out.println("Player guess: " + player + ". Dealer guess: " + dealer);
+                System.out.println("THE PLAYER GUESSED THE CORRECT NUMBER!!!");
+                break;
+            } else if (dealernew == 0) {
+                dsuccess++;
+                System.out.println("Player guess: " + player + ". Dealer guess: " + dealer);
+                System.out.println("THE DEALER GUESSED THE CORRECT NUMBER!!!");
+                break;
+            }
+        }
+        System.out.println("\nFINAL SCORE: Player - " + psuccess + ". Dealer - " + dsuccess);
+    }
+}
